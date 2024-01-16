@@ -245,7 +245,7 @@ class SMSController extends AbstractController
         return $this->json(['result'=>
             $SMS->sendByBalance(
                 [$bid->getName(),'sell/' . $bid->getId() . '/' . $shortLink],
-                168030,
+                188450,
                 $num,$bid,$this->getUser(),3
             )]);
 

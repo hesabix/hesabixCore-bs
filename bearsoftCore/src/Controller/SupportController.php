@@ -70,7 +70,7 @@ class SupportController extends AbstractController
             $entityManager->flush();
             //send sms to customer
             if($item->getSubmitter()->getMobile())
-                $SMS->send([$item->getId()],'162251',$item->getSubmitter()->getMobile());
+                $SMS->send([$item->getId()],'188452',$item->getSubmitter()->getMobile());
             return $this->json([
                 'error'=> 0,
                 'message'=> 'successful'
@@ -116,7 +116,7 @@ class SupportController extends AbstractController
                 $entityManager->persist($item);
                 $entityManager->flush();
                 //send sms to manager
-                $SMS->send([$item->getId()],'162214','09183282405');
+                $SMS->send([$item->getId()],'188454','09183282405');
                 return $this->json([
                     'error'=> 0,
                     'message'=> 'ok',
@@ -141,7 +141,7 @@ class SupportController extends AbstractController
                 $entityManager->persist($upper);
                 $entityManager->flush();
                 //send sms to manager
-                $SMS->send([$item->getId()],'162214','09183282405');
+                $SMS->send([$item->getId()],'188454','09183282405');
                 return $this->json([
                     'error'=> 0,
                     'message'=> 'ok',

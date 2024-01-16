@@ -7,9 +7,9 @@
         <meta content="width=device-width,initial-scale=1.0" name="viewport"/>
         <meta content="{% if block('description') %}{% block description %}{% endblock %}{% else %}{{ settings.discription }}{% endif %}" name="description"/>
         <meta content="Babak Alizadeh" name="author"/>
-        <meta content="توسعه فناوری سرکش" name="publisher"/>
+        <meta content="Hesabix" name="publisher"/>
         <meta name="keywords" content="{{ settings.siteKeywords }},{% block keywords %}{% endblock %}">
-        <title>بیرسافت - {% block title %}{% endblock %}</title>
+        <title>بیرسافت | {% block title %}{% endblock %}</title>
         <meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
         <meta property="og:locale" content="fa_IR" />
         <meta property="og:type" content="article" />
@@ -29,8 +29,6 @@
         <!-- END Stylesheets -->
         <!--===== Custom Font css =====-->
         <link href="{{ asset('/assets/css/custom-fonts.css') }}" rel="stylesheet"/>
-        <!-- Place this tag in your head or just before your close body tag. -->
-        <script async defer src="https://buttons.github.io/buttons.js"></script>
         {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
         {% block stylesheets %}
         {% endblock %}
@@ -52,7 +50,7 @@
                        <img class="me-2" src="{{ asset('/img/logo-blue.png') }}" alt="" width="48" height="48">
 
                        <a class="text-dark fw-semibold tracking-wide" href="{{ path('general_home') }}"><span class="opacity-75">بیرسافت</span>
-                           <small class="fw-lighter d-none d-sm-block">نرم‌افزار حسابداری ابری و کاملا رایگان</small>
+                           <small class="fw-lighter d-none d-sm-block">حسابداری بر پایه ابر</small>
                        </a>
                        <!-- END Logo -->
                    </div>
@@ -139,11 +137,6 @@
                                                <span class="nav-main-link-name">حریم خصوصی</span>
                                            </a>
                                        </li>
-                                       <li class="nav-main-item">
-                                           <a class="nav-main-link" href="{{ path('general_opensource') }}">
-                                               <span class="nav-main-link-name">متن باز</span>
-                                           </a>
-                                       </li>
                                    </ul>
                                </li>
                            </ul>
@@ -202,14 +195,6 @@
                                        <li>
                                            <a class="fw-semibold" href="/front/faq">
                                                <i class="fa fa-fw fa-question-circle text-primary-lighter me-1"></i> سوالات متداول </a>
-                                       </li>
-                                       <li>
-                                           <a class="fw-semibold" href="/front/help/api">
-                                               <i class="fa fa-fw fa-server text-primary-lighter me-1"></i> مستندات API  </a>
-                                       </li>
-                                       <li>
-                                           <a class="fw-semibold" href="/front/update-list">
-                                               <i class="fa fa-fw fa-history text-primary-lighter me-1"></i>لیست تغییرات و بروزرسانی ها</a>
                                        </li>
                                    </ul>
                                </div>

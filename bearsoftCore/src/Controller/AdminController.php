@@ -376,7 +376,7 @@ class AdminController extends AbstractController
             $entityManager->persist($item);
             $entityManager->flush();
             $notification->insert('تسویه کیف پول انجام شد.','/acc/wallet/view',$bid,$bid->getOwner());
-            $SMS->send([$bid->getName()],174225,$bid->getOwner()->getMobile());
+            $SMS->send([$bid->getName()],188449,$bid->getOwner()->getMobile());
             return $this->json(['result' => 1]);
 
         }

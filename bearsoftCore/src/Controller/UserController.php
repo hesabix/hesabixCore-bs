@@ -242,7 +242,7 @@ class UserController extends AbstractController
             $user->setActive(false);
             $entityManager->persist($user);
             $entityManager->flush();
-            $SMS->send([$user->getVerifyCode()],'162246',$user->getMobile());
+            $SMS->send([$user->getVerifyCode()],'188453',$user->getMobile());
             try {
                 $email = (new Email())
                     ->to($user->getEmail())
@@ -308,7 +308,7 @@ class UserController extends AbstractController
 
         if($send){
             //send sms and email
-            $SMS->send([$user->getVerifyCode()],'162246',$user->getMobile());
+            $SMS->send([$user->getVerifyCode()],'188453',$user->getMobile());
             $email = (new Email())
                 ->to($user->getEmail())
                 ->priority(Email::PRIORITY_HIGH)
@@ -347,7 +347,7 @@ class UserController extends AbstractController
                         );
                         $entityManager->persist($obj);
                         $entityManager->flush();
-                        $SMS->send([$password],163543,$obj->getMobile());
+                        $SMS->send([$password],188451,$obj->getMobile());
                         $email = (new Email())
                             ->to($obj->getEmail())
                             ->priority(Email::PRIORITY_HIGH)
@@ -416,7 +416,7 @@ class UserController extends AbstractController
         $entityManager->persist($user);
         $entityManager->flush();
         //send sms and email
-        $SMS->send([$user->getVerifyCode()],'160887',$user->getMobile());
+        $SMS->send([$user->getVerifyCode()],'188455',$user->getMobile());
         $email = (new Email())
             ->to($user->getEmail())
             ->priority(Email::PRIORITY_HIGH)
