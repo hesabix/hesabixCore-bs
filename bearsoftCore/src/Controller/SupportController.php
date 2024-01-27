@@ -13,6 +13,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\SerializerInterface;
+use App\Entity\Settings;
+use App\Entity\User;
+use App\Service\Notification;
 
 class SupportController extends AbstractController
 {
@@ -46,8 +49,7 @@ class SupportController extends AbstractController
         ]);
     }
     #[Route('/api/admin/support/mod/{id}', name: 'app_admin_support_mod')]
-    public function app_admin_support_mod(SMS $SMS,Request $request, EntityManagerInterface $entityManager,string $id = ''): JsonResponse
-    {
+    public function app_admin_support_mod(SMS $SMS,Request $request, EntityManagerInterface $entityManager,string $id = '',Notification $notifi): JsonResponse    {
         $params = [];
         if ($content = $request->getContent()) {
             $params = json_decode($content, true);
@@ -71,6 +73,10 @@ class SupportController extends AbstractController
             //send sms to customer
             if($item->getSubmitter()->getMobile())
                 $SMS->send([$item->getId()],'188452',$item->getSubmitter()->getMobile());
+            //send notification to user
+            $settings = $entityManager->getRepository(Settings::class)->findAll()[0];
+            $url = $settings->getAppSite() . '/profile/support-view/' . $item->getId();
+            $notifi->insert("به درخواست پشتیبانی پاسخ داده شد",$url,null,$item->getSubmitter());
             return $this->json([
                 'error'=> 0,
                 'message'=> 'successful'
@@ -142,6 +148,9 @@ class SupportController extends AbstractController
                 $entityManager->flush();
                 //send sms to manager
                 $SMS->send([$item->getId()],'188454','09183282405');
+                $admins = $entityManager->getRepository(User::class)->findByRole('ROLE_ADMIN');
+                foreach($admins as $admin)
+                    $SMS->send([$item->getId()],'188454',$admin->getMobile());
                 return $this->json([
                     'error'=> 0,
                     'message'=> 'ok',

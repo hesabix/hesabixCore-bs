@@ -23,7 +23,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-
+use App\Service\JsonResp;
 class HesabdariController extends AbstractController
 {
     private array $tableExport = [];
@@ -156,7 +156,7 @@ class HesabdariController extends AbstractController
             $rds[] = $temp;
         }
         return $this->json([
-            'doc'=>$doc,
+            'doc'=>JsonResp::SerializeHesabdariDoc($doc),
             'rows'=>$rows,
             'relatedDocs'=>$rds
         ]);
@@ -379,8 +379,12 @@ class HesabdariController extends AbstractController
         $doc->setAmount($amount);
         $entityManager->persist($doc);
         $entityManager->flush();
-        $log->insert('حسابداری','سند حسابداری شماره ' . $doc->getCode() . ' ثبت / ویرایش شد.',$this->getUser(),$request->headers->get('activeBid'));
-
+        $log->insert(
+            'حسابداری','سند حسابداری شماره ' . $doc->getCode() . ' ثبت / ویرایش شد.',
+            $this->getUser(),
+            $request->headers->get('activeBid'),
+            $doc
+        );
         return $this->json([
             'result'=>1,
             'doc'=>$provider->Entity2Array($doc,0)
